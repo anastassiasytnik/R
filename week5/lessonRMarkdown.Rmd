@@ -1,0 +1,42 @@
+---
+title: "lessonRMarkdown"
+author: Lampidusa
+output: html_document
+date: "2024-03-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Hotel Bookings Practice
+
+## Setting up the environment
+
+Load libraries first if you haven't already. If you haven't you might need to install them
+by using **install.packages(*<lib_name>*)** command.
+```{r}
+library(tidyverse)
+install.packages("janitor")
+install.packages("skimr")
+library(skimr)
+library(janitor)
+#check that they are installed and loaded
+library()
+```
+  Then load the data and check it out.
+
+```{r}
+bookings_df <- read_csv("hotel_bookings.csv")
+str(bookings_df)
+```
+## Exercise
+The column "adr" means "average daily rate". 
+If we wanted to know average price per adult we could do it by selecting
+data into separate dataset and use mutate function for calculations:
+
+```{r}
+new_df <- select(bookings_df, `adr`, adults)
+new_df <- mutate(new_df, cost_per_adults = `adr` / adults)
+print(new_df)
+```
+
